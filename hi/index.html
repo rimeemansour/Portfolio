@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="output.css">
+    <script src="https://kit.fontawesome.com/fa6c61e175.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header" class="w-80vw h-screen bg-cover bg-center">
+        <div class="container px-10 py-10">
+            <nav class="flex items-center justify-between flex-wrap">
+                <ul id="sidemenu" class="hidden md:flex md:items-center md:space-x-20">
+                    <li><a href="#header" class="text-white">Home</a></li>
+                    <li><a href="#about" class="text-white">About</a></li>
+                    <li><a href="#projects" class="text-white">Projects</a></li>
+                    <li><a href="#contact" class="text-white">Contact</a></li>
+                </ul>
+                <i class="fas fa-times cursor-pointer md:hidden" onclick="closemenu()"></i>
+                <i class="fas fa-bars cursor-pointer md:hidden" onclick="openmenu()"></i>
+            </nav>
+            <div class="header-text mt-20 md:mt-0">
+                <p class="text-white text-3xl md:text-5xl">Web Developer</p>
+                <h1 class="text-white text-5xl md:text-7xl font-bold mt-4 md:mt-8">
+                    Hi, I'm <span class="text-green-500">Rime</span> Mansour
+                </h1>
+            </div>
+        </div>
+    </div>
+    
+<!---------------about---------------------->
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col1">
+                <img src="Images/background.png.jpg">
+            </div>
+            <div class="about-col2">
+                <h1 class="sub-title">About Me</h1>
+                <p> As a computer science student, I'm passionate about technology and problem-solving. I thrive on challenges and love exploring new ideas in this ever-evolving field.</p>
+
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                    <p class="tab-links" onclick="opentab('education')">Education</p>
+                </div>
+                <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>Web Development</span><br>Web app Development<br> Proficient in ReactJS for building interactive and dynamic user interfaces in web applications.</li>
+                        <li><span>App Development</span><br>Building Android/iOS apps <br> Proficient in SwiftUI for developing dynamic and responsive user interfaces across Apple platforms.<br>Proficient in Android development for creating native mobile applications on the Android platform.</li>
+                    </ul> 
+                </div>
+                <div class="tab-contents" id="experience">
+                    <ul>
+                        <li><span>February - Current</span><br>Web App Development Bootcamp At Eurisko</li>
+                        <li><span>2023</span><br>Internship SwiftUI At I-magine Works</li>
+                    </ul> 
+                </div>
+                <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>2020</span><br>Computer Science At Lebanese University</li>
+                    </ul> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
+
+
+<!-----------------projects------------------>
+<div id="projects">
+    <div class="container">
+        <h1 class="sub-title">My Work</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="Images/img1.jpg">
+                <div class="layer">
+                    <h3>Duolingo App</h3>
+                    <p>The app helps you learn english and french.</p>
+                </div>
+
+            </div>
+            <div class="work">
+                <img src="Images/img2 (1).jpg">
+
+            </div>
+            <div class="work">
+                <img src="Images/img3 (2).jpg">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-----------------contact--------------->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fa-solid fa-share"></i>rimemansour24@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i>76 611 860</p>
+                <a href="Images/CV..RimeMansour....pdf" download class="btn">Download CV</a>
+
+            </div>
+            <div class="contact-right">
+                <form name='submit-to-google-sheet'>
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="text" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+
+    function opentab(tabname) {
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+</script>
+
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+
+    function openmenu() {
+        sidemenu.style.right = "0";
+    }
+
+    function closemenu() {
+        sidemenu.style.right = "-200px";
+    }
+</script>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwZH7hI8xrUuO6x-_stDpGCZrS3oWWc3MT2SpL2cdqBkP8TbZU1ELXlUclGbh4Xen_q/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message sent succefully!"
+            setTimeout(function() {
+                msg.innerHTML = ""
+            }, 5000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+    
+</body>
+</html>
